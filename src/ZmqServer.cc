@@ -1,6 +1,8 @@
 #include "ZmqServer.hh"
 
 #include <iostream>
+#include <sstream>
+
 #include <zmq.h>
 
 using namespace std;
@@ -60,14 +62,33 @@ G4String ZmqServer::OnMessage(const G4String& message)
         argument = message.substr(spacePos + 1);
     }
 
+    cout << message << endl;
+
+    ostringstream oss;
+
     if (function == "COMMAND")
     {
-        fSession->QueueCommand(argument);
-        return "Queued";
+        G4int commandId = fSession->QueueCommand(argument);
+        oss << commandId;
+    }
+    else if (function == "STATUS")
+    {
+        istringstream iss(argument);
+        G4int commandId;
+        iss >> commandId;
+
+        G4int status = fSession->GetCommandStatus(commandId);
+        oss << status;
+    }
+    else if (function == "EXIT")
+    {
+        fSession->Exit();
+        oss << "Exit";
     }
     else
     {
         cout << "Unknown command" << endl;
-        return "Unknown command";
+        oss << "Unknown command";
     }
+    return oss.str();
 }

@@ -9,7 +9,7 @@ using namespace std;
 
 RemoteSession::RemoteSession() :
     fLastCommandQueued(-1), fLastCommandExecuted(-1),
-    fSleepInterval(10000)
+    fSleepInterval(10000), fEnd(false)
 {
 
 }
@@ -19,7 +19,7 @@ void RemoteSession::SessionStart(shared_ptr<BaseServer> server)
     server->Start(); // TODO: Do we need to keep it?
     G4UImanager* uiManager = G4UImanager::GetUIpointer();
 
-    while (true)
+    while (!fEnd)
     {
         G4String command;
         if (!PopCommand(command))
@@ -79,4 +79,10 @@ G4bool RemoteSession::PopCommand(G4String& commandRef)
         fCommandQueue.pop_front();
         return true;
     }
+}
+
+void RemoteSession::Exit()
+{
+    G4AutoLock lock(&sessionMutex);
+    fEnd = true;
 }

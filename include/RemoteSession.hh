@@ -26,6 +26,8 @@ public:
 
     G4bool PopCommand(G4String& commandRef);
 
+    void Exit();
+
     const G4int QUEUED = -1;
     const G4int EXECUTING = -2;
     const G4int UNKNOWN = -3;
@@ -42,6 +44,8 @@ protected:
     G4float fSleepInterval;    
 
     std::shared_ptr<BaseServer> fServer;
+
+    G4bool fEnd;
 };
 
 #endif
