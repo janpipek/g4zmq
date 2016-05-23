@@ -2,7 +2,7 @@
 
 G4VPhysicalVolume* DetectorConstruction::Construct() 
 {
-	// You have to implement this
+	return nullptr;
 }
 
 // Implement the following only if you have fields / sensitive detector
