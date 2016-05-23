@@ -1,1 +1,1 @@
-This is a simple template for a Geant4 application.
+This is a simple example of a ZMQ communication with Geant4 application.

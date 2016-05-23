@@ -1,0 +1,6 @@
+/run/initialize
+
+/gps/particle proton
+/gps/energy 60 MeV
+/gps/direction 0 0 1
+

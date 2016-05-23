@@ -3,10 +3,17 @@
 
 #include "G4VUserPrimaryGeneratorAction.hh"
 
+class G4GeneralParticleSource;
+
 class PrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
 {
 public:
+	PrimaryGeneratorAction();
+
     void GeneratePrimaries(G4Event* anEvent) override;
+
+private:
+	G4GeneralParticleSource* fGps;
 };
 
 #endif

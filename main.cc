@@ -18,9 +18,10 @@
 
 #include "ActionInitialization.hh"
 #include "DetectorConstruction.hh"
-#include "PhysicsList.hh"
 #include "RemoteSession.hh"
 #include "ZmqServer.hh"
+
+#include <QBBC.hh>
 
 using namespace std;
 
@@ -37,7 +38,7 @@ int main(int argc, char** argv)
 
     auto runManager = new RunManager();
 
-    runManager->SetUserInitialization(new PhysicsList());
+    runManager->SetUserInitialization(new QBBC());
     runManager->SetUserInitialization(new DetectorConstruction());
     runManager->SetUserInitialization(new ActionInitialization());
 
